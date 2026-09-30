@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript Quiz</title>
+</head>
+<body>
+    <link rel="stylesheet" href="javaquiz.css">
+    <div class="quiz">
+        <h1>JavaScript Quiz</h1>
+        <h2 id="question"></h2>
+        <button id="option1" onclick="checkAnswer(0)"></button>
+        <button id="option2" onclick="checkAnswer(1)"></button>
+        <button id="option3" onclick="checkAnswer(2)"></button>
+        <button id="option4" onclick="checkAnswer(3)"></button>
+        <button id="next" onclick="nextQuestion()">
+            Next Question
+        </button>
+        <div id="result"></div>
+    </div>
+    <script>
+        let questions = [
+            {
+                question: "What does HTML stand for?",
+                options: [
+                    "Hyper Text Markup Language",
+                    "High Text Machine Language",
+                    "Hyper Tool Language",
+                    "Home Text Markup Language"
+                ],
+                answer: 0
+            },
+
+            {
+                question: "Which language is used for styling a webpage?",
+                options: [
+                    "HTML",
+                    "CSS",
+                    "JavaScript",
+                    "Python"
+                ],
+                answer: 1
+            },
+
+            {
+                question: "Which language makes a website interactive?",
+                options: [
+                    "HTML",
+                    "CSS",
+                    "JavaScript",
+                    "SQL"
+                ],
+                answer: 2
+            }
+
+        ];
+
+        let questionNumber = 0;
+        let score = 0;
+        function showQuestion() {
+            document.getElementById("question").innerText =
+                questions[questionNumber].question;
+            document.getElementById("option1").innerText =
+                questions[questionNumber].options[0];
+            document.getElementById("option2").innerText =
+                questions[questionNumber].options[1];
+            document.getElementById("option3").innerText =
+                questions[questionNumber].options[2];
+            document.getElementById("option4").innerText =
+                questions[questionNumber].options[3];
+            document.getElementById("option1").style.background = "#1d3557";
+            document.getElementById("option2").style.background = "#1d3557";
+            document.getElementById("option3").style.background = "#1d3557";
+            document.getElementById("option4").style.background = "#1d3557";
+        }
+        function checkAnswer(answer) {
+            let selectedButton;
+            if (answer == 0) {
+                selectedButton = document.getElementById("option1");
+            }
+            else if (answer == 1) {
+                selectedButton = document.getElementById("option2");
+            }
+            else if (answer == 2) {
+                selectedButton = document.getElementById("option3");
+            }
+            else {
+                selectedButton = document.getElementById("option4");
+            }
+
+            selectedButton.style.background = "#2a9d8f";
+
+            if (answer == questions[questionNumber].answer) {
+
+                score++;
+
+            }
+
+        }
+        function nextQuestion() {
+            questionNumber++;
+            if (questionNumber < questions.length) {
+
+                showQuestion();
+
+            }
+            else {
+
+                document.getElementById("question").innerText =
+                    "Quiz Finished!";
+
+                document.getElementById("option1").style.display = "none";
+                document.getElementById("option2").style.display = "none";
+                document.getElementById("option3").style.display = "none";
+                document.getElementById("option4").style.display = "none";
+                document.getElementById("next").style.display = "none";
+
+                document.getElementById("result").innerText =
+                    "Your Score: " + score + " / " + questions.length;
+            }
+
+        }
+        showQuestion();
+    </script>
+</body>
+</html>
